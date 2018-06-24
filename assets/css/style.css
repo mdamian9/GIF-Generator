@@ -1,9 +1,10 @@
 body {
     background-image: url("../images/bg.jpg");
     background-size: cover;
+    position: absolute;
     color: white;
 }
 
-#animal-btn {
+.animal-btn {
     margin-right: 5px;
 }
