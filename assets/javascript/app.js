@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     var myArray = ["dog", "cat", "turtle", "eagle", "zebra"];
 
     for (var i = 0; i < myArray.length; i++) {
@@ -7,6 +8,7 @@ $(document).ready(function () {
 
     // Prevents page from refreshing when clicking on "Submit"
     $("#animal-form").submit(function (e) {
+
         e.preventDefault();
 
         var animalName = $("#animal-input").val();
@@ -22,6 +24,8 @@ $(document).ready(function () {
     });
 
     $("#animal-btns").on("click", ".animal-btn", function () {
+
+        $("#animal-gifs").html("");
         var animal = $(this).attr("data-animal");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
             animal + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -49,6 +53,16 @@ $(document).ready(function () {
             };
 
         });
+
+    });
+
+    $("#reset-btns").on("click", function() {
+
+        $("#animal-btns").html("");
+        for (var i = 0; i < myArray.length; i++) {
+            $("#animal-btns").append('<button class="animal-btn" data-animal="' + myArray[i] + '">' + myArray[i] + '</button>');
+        };
+
     });
 
     // Function: when user clicks on an element with class=".gif-img" inside an element with id="animal-gifs" - if image is still then
