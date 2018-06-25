@@ -58,7 +58,7 @@ $(document).ready(function () {
                 newImage.attr("src", results[i].images.fixed_height_still.url);
                 newDiv.append(p);
                 newDiv.append(newImage);
-                $("#animal-gifs").prepend(newDiv);
+                $("#animal-gifs").append(newDiv);
 
             };
 
