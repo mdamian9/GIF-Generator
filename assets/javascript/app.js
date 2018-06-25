@@ -35,10 +35,9 @@ $(document).ready(function () {
         });
     });
 
-    // this function is not working properly yet
-    $(".gif-img").on("click", function () {
-
-        alert("click on gif works");
+    // Function: when user clicks on an element with class=".gif-img" inside an element with id="animal-gifs" - if image is still then
+    // make gif animate. If gif is animating, make gif still
+    $("#animal-gifs").on("click", ".gif-img", function () {
 
         var state = $(this).attr("data-state");
 
@@ -49,8 +48,6 @@ $(document).ready(function () {
             $(this).attr("src", $(this).attr("data-still"));
             state = $(this).attr("data-state", "still");
         };
-
-        console.log(state);
 
     });
 
@@ -68,11 +65,3 @@ $(document).ready(function () {
 
 
 });
-
-// Fix start / stop gif by clicking on gif
-// Obtain user input
-// Save user input to variable
-// Create new button based on user input
-// Give new button same functionality as the rest
-
-// When button is clicked, CSS is changed (?)

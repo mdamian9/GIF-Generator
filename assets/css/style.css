@@ -1,7 +1,7 @@
 body {
     background-image: url("../images/bg.jpg");
     background-size: cover;
-    position: absolute;
+    position: absolute; /* page does not change styling when an animal button is clicked */
     color: white;
 }
 
