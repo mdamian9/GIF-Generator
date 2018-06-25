@@ -5,7 +5,33 @@ $(document).ready(function () {
         $("#animal-btns").append('<button class="animal-btn" data-animal="' + myArray[i] + '">' + myArray[i] + '</button>');
     };
 
-    $(".animal-btn").on("click", function () {
+    // Prevents page from refreshing when clicking on "Submit"
+    $("#animal-form").submit(function (e) {
+        e.preventDefault();
+
+        // var animalName = $("#animal-input").val();
+
+        if ($("#animal-input").val() === "") {
+            alert("There was no input. Please try again!");
+        } else {
+            $("#animal-btns").append('<button class="animal-btn" data-animal="' + $("#animal-input").val() + '">' +
+                $("#animal-input").val() + '</button>');
+        };
+
+        console.log($("#animal-input").val());
+
+        // when user clicks submit -- need the following
+        // obtain user input and set to variable
+        // create a loop (do while?) that creates and appends animal buttons to the page
+        // set it up so that it obtains data from giphy api
+
+        // var x;
+        // x = $("#animal-input").value;
+        // console.log(x);
+
+    });
+
+    $("#animal-btns").on("click", ".animal-btn", function () {
         var animal = $(this).attr("data-animal");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
             animal + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -48,23 +74,6 @@ $(document).ready(function () {
             $(this).attr("src", $(this).attr("data-still"));
             state = $(this).attr("data-state", "still");
         };
-
-    });
-
-    // Prevents page from refreshing when clicking on "Submit"
-    $("#animal-form").submit(function (e) {
-        e.preventDefault();
-
-        console.log($("#animal-input").val());
-
-        // when user clicks submit -- need the following
-        // obtain user input and set to variable
-        // create a loop (do while?) that creates and appends animal buttons to the page
-        // set it up so that it obtains data from giphy api
-
-        // var x;
-        // x = $("#animal-input").value;
-        // console.log(x);
 
     });
 
