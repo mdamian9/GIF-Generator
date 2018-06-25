@@ -55,13 +55,17 @@ $(document).ready(function () {
     $("#animal-form").submit(function (e) {
         e.preventDefault();
 
+        console.log($("#animal-input").val());
+
         // when user clicks submit -- need the following
         // obtain user input and set to variable
         // create a loop (do while?) that creates and appends animal buttons to the page
         // set it up so that it obtains data from giphy api
 
+        // var x;
+        // x = $("#animal-input").value;
+        // console.log(x);
+
     });
-
-
 
 });
