@@ -5,6 +5,10 @@ body {
     color: white;
 }
 
-.animal-btn {
+.char-btn {
     margin: 5px;
+    background-color: rgb(146, 9, 9);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
 }

@@ -1,53 +1,57 @@
 $(document).ready(function () {
 
-    // Create array of animals.
-    var myArray = ["dog", "cat", "turtle", "eagle", "zebra"];
+    // Create array of fictional characters.
+    var myArray = ["borat", "bear jew", "one punch man", "venom snake", "deadpool", "mr poopy butthole", "jon snow", "morty",
+        "rick sanchez", "goku"];
 
-    // For every animal in array, create and append a new button element with the following attributes:
+    // For every character in array, create and append a new button element with the following attributes:
     for (var i = 0; i < myArray.length; i++) {
-        $("#animal-btns").append('<button class="animal-btn" data-animal="' + myArray[i] + '">' + myArray[i] + '</button>');
+        $("#char-btns").append('<button class="char-btn" data-char="' + myArray[i] + '">' + myArray[i] + '</button>');
     };
 
-    // When user clicks on submit button in the form #animal-form, execute the following function:
-    $("#animal-form").submit(function (e) {
+    // When user clicks on submit button in the form #char-form, execute the following function:
+    $("#char-form").submit(function (e) {
 
         // Prevents page from refreshing when clicking on "Submit".
         e.preventDefault();
 
-        // Take value of user input and store it in var animalName.
-        var animalName = $("#animal-input").val();
+        // Take value of user input and store it in var charName. Trim any additional whitespaces.
+        var charName = $("#char-input").val().trim();
 
         // If user clicked submit without any input, alert user of error. If there is valid input, then create and append a new 
-        // animal button with the same attributes as the originals.
-        if ($("#animal-input").val() === "") {
+        // character button with the same attributes as the originals.
+        if (charName === "") {
             alert("There was no input. Please try again!");
         } else {
-            $("#animal-btns").append('<button class="animal-btn" data-animal="' + animalName + '">' + animalName + '</button>');
+            $("#char-btns").append('<button class="char-btn" data-char="' + charName + '">' + charName + '</button>');
         };
+
+        // Clear form #char-input after subission.
+        $("#char-input").val("");
 
     });
 
-    // When user clicks on an element with class=".animal-btn" inside an element with id="animal-btns" - execute the following function:
-    $("#animal-btns").on("click", ".animal-btn", function () {
+    // When user clicks on an element with class=".char-btn" inside an element with id="char-btns" - execute the following function:
+    $("#char-btns").on("click", ".char-btn", function () {
 
-        // Clear any content in #animal-gifs, where gifs will be displayed. This is so that gifs aren't appended forever.
-        $("#animal-gifs").html("");
+        // Clear any content in #char-gifs, where gifs will be displayed. This is so that gifs aren't appended forever.
+        $("#char-gifs").html("");
 
-        // Store the name of the animal (value of "data-animal") in new var animal. Store query URL in new var queryURL, make ajax
+        // Store the name of the character (value of "data-char") in new var char. Store query URL in new var queryURL, make ajax
         // request, then once response is obtained execute the following function, passing response as a parameter.
-        var animal = $(this).attr("data-animal");
+        var character = $(this).attr("data-char");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+            character + "&api_key=dc6zaTOxFJmzC&limit=10";
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
 
-            // Take response.data (array of gifs data) and store it into results
+            // Take response.data (array of gifs data) and store it into results.
             var results = response.data;
 
-            // For every gif in array: create new div element, and new p element. Display rating in p element. Create and append new image 
-            // tag with data from ajax request. Gif will be still in the beginning. 
+            // For every gif in array: create new div element, and new p element. Display rating in p element. Create and append new  
+            // image tag with data from ajax request. Gif will be still in the beginning. 
             for (var i = 0; i < results.length; i++) {
 
                 var newDiv = $("<div>");
@@ -58,7 +62,7 @@ $(document).ready(function () {
                 newImage.attr("src", results[i].images.fixed_height_still.url);
                 newDiv.append(p);
                 newDiv.append(newImage);
-                $("#animal-gifs").append(newDiv);
+                $("#char-gifs").append(newDiv);
 
             };
 
@@ -66,24 +70,24 @@ $(document).ready(function () {
 
     });
 
-    // If user clicks "Reset Buttons" button, clear added buttons and go back to original ones from array
+    // If user clicks "Reset Character Buttons" button, clear added buttons and go back to original ones from array.
     $("#reset-btns").on("click", function () {
 
-        // Clear #animal-btns content, append original buttons
-        $("#animal-btns").html("");
+        // Clear #char-btns content, append original buttons.
+        $("#char-btns").html("");
         for (var i = 0; i < myArray.length; i++) {
-            $("#animal-btns").append('<button class="animal-btn" data-animal="' + myArray[i] + '">' + myArray[i] + '</button>');
+            $("#char-btns").append('<button class="char-btn" data-char="' + myArray[i] + '">' + myArray[i] + '</button>');
         };
 
     });
 
-    // When user clicks on an element with class=".gif-img" inside an element with id="animal-gifs" - execute function
-    $("#animal-gifs").on("click", ".gif-img", function () {
+    // When user clicks on an element with class=".gif-img" inside an element with id="char-gifs" - execute function:
+    $("#char-gifs").on("click", ".gif-img", function () {
 
-        // Store gif data-state value into var state
+        // Store gif data-state value into var state.
         var state = $(this).attr("data-state");
 
-        // If image is still then make gif animate. If gif is animating, make gif still
+        // If image is still then make gif animate. If gif is animating, make gif still.
         if (state === "still") {
             $(this).attr("src", $(this).attr("data-animate"));
             state = $(this).attr("data-state", "animate");
